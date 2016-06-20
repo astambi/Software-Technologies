@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+header, footer, aside, main {
+    background: beige;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+}
+header {
+    font-size: 16pt;
+    font-weight: bold;
+}
+aside {
+    float: left;
+    margin-top: 0;
+    background: beige;
+    width: 100px;
+}
+aside a {
+    display: block;
+    text-align: left;
+    margin: 5px;
+    padding: 8px;
+    text-decoration: none;
+    color: brown;
+}
+aside a:hover {
+    background: burlywood;
+    border-radius: 3px;
+}
+main {
+    margin-left: 130px;
+    text-align: left;
+    background: #F5f5f5;
+	border-radius: 5px; /* added extra styling */
+}
+p {
+    margin: 10px 5px;
+}
+footer {
+    clear: both;
+    font-size: 11pt;
+}
+form {
+	text
+}
+.left {
+    float: left; 		/* added extra styling*/
+	margin: 10px 5px;	/* added extra styling*/
+}
