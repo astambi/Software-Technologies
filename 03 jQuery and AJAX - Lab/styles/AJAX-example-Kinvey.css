@@ -1,0 +1,10 @@
+.title{
+    background: lightblue;
+    padding: 20px;
+    font-weight: 600;
+}
+.content{
+    background: lavender;
+    margin: 20px;
+    padding: 20px;
+}
