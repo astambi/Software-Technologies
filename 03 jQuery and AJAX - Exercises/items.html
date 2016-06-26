@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Items</title>
+    <script src="scripts/jquery-3.0.0.min.js"></script>
+    <script src="scripts/items.js"></script>
+    <link rel="stylesheet" href="styles/items.css">
+</head>
+<body>
+    <h1>List of Items</h1>
+    <ul id="items"></ul>
+    <input type="text" id="newItemText">
+    <input type="button" onclick="addItem()" value="Add">
+    <script>
+        $(addInitialItems);
+        $(function() {
+            $('#newItemText').keypress(addByKeypress)
+        });
+    </script>
+</body>
+</html>
