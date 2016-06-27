@@ -12,13 +12,16 @@ function createPost() {
         data: postData,
         success: showSuccess,
         error: showError
-    })
+    });
 }
 
 function showSuccess(data, status) {
     let successMsg = $('<div>')
         .text("Created: " + JSON.stringify(data));
     $('body').append(successMsg);
+    // optional
+    $('#newPostTitle').val('');
+    $('#newPostBody').val('');
 }
 
 function showError(data, status) {

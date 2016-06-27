@@ -20,7 +20,11 @@ function showTowns() {
     $('body').append(townsDiv);
 }
 
-// function showTowns2() {
+$(function () {
+    $('#towns li').click(selectTowns);
+});
+
+// function showTowns() {
 //     let selectedTowns = $('#towns [data-selected=true]');
 //     let towns = [];
 //     for (let t of selectedTowns)

@@ -5,10 +5,6 @@ function addItemToList(text) {
         .append($('<a href="#" onclick="deleteItem(this)">[Delete]</a>'));
     $('#items').append(li);
 }
-function addInitialItems() {
-    addItemToList("First");
-    addItemToList("Second");
-}
 function addItem() {
     let text = $('#newItemText').val();
     addItemToList(text);
@@ -21,3 +17,10 @@ function addByKeypress(e) {
     if (e.keyCode == 13)
         $('#newItemText + input[type="button"]').click();
 }
+$(function () {
+    addItemToList("First");
+    addItemToList("Second");
+});
+$(function () {
+    $('#newItemText').keypress(addByKeypress)
+});

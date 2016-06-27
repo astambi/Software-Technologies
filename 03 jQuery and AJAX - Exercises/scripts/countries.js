@@ -63,3 +63,4 @@ function fixRowLinks() {
     // hide the [Down] link in the last table row
     $(tableRows[tableRows.length - 1]).find("a:contains('Down')").hide();
 }
+$(addInitialCountries);
