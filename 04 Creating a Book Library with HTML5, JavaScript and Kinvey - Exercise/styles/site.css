@@ -1,0 +1,68 @@
+#menu {
+    background: #DDD;
+    text-align: center;
+    padding: 5px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+#menu a {
+    display: none;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+#menu a:hover {
+    background: lightsteelblue;
+}
+main > section {
+    display: none;
+    padding: 20px 5px;
+}
+section h1 {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+table th {
+    background: lightsteelblue;
+    padding: 10px;
+    border-radius: 5px;
+}
+table td {
+    padding: 5px 10px;
+    background: lavender;
+    border-radius: 5px;
+}
+#infoBox, #errorBox, #loadingBox {
+    width: 80%;
+    margin: 10px auto;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+}
+#loadingBox {
+    background: #7CB3E9;
+}
+#infoBox {
+    background: #393;
+}
+#errorBox {
+    background: #F50;
+}
+.divComments {
+    background: ivory;
+    border-radius: 25px;
+    /*margin: 0 10px 10px 10px;*/
+    padding: 10px 20px;
+}
+.divCommentAuthor {
+    font-style: italic;
+    margin-left: 50px;
+}
+footer {
+    background: #DDD;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 10px;
+}

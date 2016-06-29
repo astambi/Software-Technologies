@@ -1,30 +1,29 @@
-// Nakov's LIVE video tutorial
+const kinveyBaseUrl = "https://baas.kinvey.com/";
+const kinveyAppKey = "kid_rJ1skPRB";
+const kinveyAppSecret = "18eeb94276d74b95bb51f0896ceef932";
 
-const kinveyAppId = 'kid_rJ1skPRB';
-const kinveyAppSecret = '18eeb94276d74b95bb51f0896ceef932';
-const kinveyServiceBaseUrl = 'https://baas.kinvey.com/';
-
-function showView(viewId) {
-    $("main > section").hide();
-    $("#" + viewId).show();
-    // alternatively call function with showView('#viewId')
-    // $(viewId).show();
+function showView(viewName) {
+    // Hide all views and show the selected view
+    $('main > section').hide();
+    $('#' + viewName).show();
 }
-function showHideNavigationLinks() {
-    let loggedIn = sessionStorage.authToken != null;
-    if (loggedIn){
-        $("#linkLogin").hide();
-        $("#linkRegister").hide();
-        $("#linkListBooks").show();
-        $("#linkCreateBook").show();
-        $("#linkLogout").show();
+function showHideMenuLinks() {
+    $('#linkHome').show();
+    if (sessionStorage.getItem('authToken') == null) {
+        // User not logged in
+        $('#linkLogin').show();
+        $('#linkRegister').show();
+        $('#linkListBooks').hide();
+        $('#linkCreateBook').hide();
+        $('#linkLogout').hide();
     }
     else {
-        $("#linkLogin").show();
-        $("#linkRegister").show();
-        $("#linkListBooks").hide();
-        $("#linkCreateBook").hide();
-        $("#linkLogout").hide();
+        // User logged in
+        $('#linkLogin').hide();
+        $('#linkRegister').hide();
+        $('#linkListBooks').show();
+        $('#linkCreateBook').show();
+        $('#linkLogout').show();
     }
 }
 
@@ -36,47 +35,28 @@ function showLoginView() {
     showView('viewLogin');
 }
 function login() {
-    let authBase64 = btoa(kinveyAppId + ":" + kinveyAppSecret);
-    let loginUrl = kinveyServiceBaseUrl + "user/" + kinveyAppId + "/login";
-    let loginData = {
+    const kinveyLoginUrl = kinveyBaseUrl + "user/" + kinveyAppKey + "/login";
+    const kinveyAuthHeaders = {
+        "Authorization": "Basic " + btoa(kinveyAppKey + ":" + kinveyAppSecret)
+    };
+    let userData = {
         username: $('#loginUser').val(),
         password: $('#loginPass').val()
     };
-    let loginHeaders = {
-        "Authorization": "Basic " + authBase64
-    };
     $.ajax({
         method: "POST",
-        url: loginUrl,
-        data: loginData,
-        headers: loginHeaders,
+        url: kinveyLoginUrl,
+        headers: kinveyAuthHeaders,
+        data: userData,
         success: loginSuccess,
-        error: showAjaxError
+        error: handleAjaxError
     });
-    function loginSuccess(data, status) {
-        sessionStorage.authToken = data._kmd.authtoken;
-        showListBooksView();
-        showHideNavigationLinks();
-        showInfo("Login successful");
-    }
-}
-
-function showInfo(messageText) {
-    $('#infoBox').text(messageText).show().delay(3000).fadeOut();
-}
-function showAjaxError(data, status) {
-    let errorMsg = '';
-    if (typeof(data.readyState) != 'undefined' && data.readyState == 0) {
-        errorMsg = "Network error";
-    }
-    else if (data.responseJSON && data.responseJSON.description) {
-        errorMsg = data.responseJSON.description;
-    }
-    else {
-        errorMsg = "Error: " + JSON.stringify(data);
-    }
-    if (errorMsg != '') {
-        $('#errorBox').text(errorMsg).show();
+    function loginSuccess(response) {
+        let userAuth = response._kmd.authtoken;
+        sessionStorage.setItem('authToken', userAuth);
+        showHideMenuLinks();
+        listBooks();
+        showInfo("Login successful")
     }
 }
 
@@ -84,69 +64,69 @@ function showRegisterView() {
     showView('viewRegister');
 }
 function register() {
-    let authBase64 = btoa(kinveyAppId + ":" + kinveyAppSecret);
-    let registerUrl = kinveyServiceBaseUrl + "user/" + kinveyAppId + "/";
-    let registerData = {
+    const kinveyRegisterUrl = kinveyBaseUrl + "user/" + kinveyAppKey + "/";
+    const kinveyAuthHeaders = {
+        "Authorization": "Basic " + btoa(kinveyAppKey + ":" + kinveyAppSecret)
+    };
+    let userData = {
         username: $('#registerUser').val(),
         password: $('#registerPass').val()
     };
-    let registerHeaders = {
-        "Authorization": "Basic " + authBase64
-    };
     $.ajax({
         method: "POST",
-        url: registerUrl,
-        data: registerData,
-        headers: registerHeaders,
+        url: kinveyRegisterUrl,
+        headers: kinveyAuthHeaders,
+        data: userData,
         success: registerSuccess,
-        error: showAjaxError
+        error: handleAjaxError
     });
-    function registerSuccess(data, status) {
-        sessionStorage.authToken = data._kmd.authtoken;
-        showListBooksView();
-        showHideNavigationLinks();
-        showInfo("User registered successfully");
+    function registerSuccess(response) {
+        let userAuth = response._kmd.authtoken;
+        sessionStorage.setItem('authToken', userAuth);
+        showHideMenuLinks();
+        listBooks();
+        showInfo("User registration successful")
     }
 }
 
-function showListBooksView() {
-    showView('viewListBooks');
-    $('#books').text('');
-    let booksUrl = kinveyServiceBaseUrl + "appdata/" + kinveyAppId + "/books";
-    let authHeaders = {
-        "Authorization": "Kinvey " + sessionStorage.authToken
+function listBooks() {
+    $('#books').empty();
+    showView('viewBooks');
+
+    const kinveyBooksUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/books";
+    const kinveyAuthHeaders = {
+        "Authorization": "Kinvey " + sessionStorage.getItem('authToken')
     };
     $.ajax({
         method: "GET",
-        url: booksUrl,
-        headers: authHeaders,
-        success: booksLoaded,
-        error: showAjaxError
+        url: kinveyBooksUrl,
+        headers: kinveyAuthHeaders,
+        success: loadBooksSuccess,
+        error: handleAjaxError
     });
-    function booksLoaded(books, status) {
+    function loadBooksSuccess(books) {
         showInfo("Books loaded");
         if(books.length == 0) {
             $('#books').text("No books in the library")
         }
         else {
             let booksTable = $('<table>')
-                .append($('<tr>')
-                    .append($('<th>Title</th>'))
-                    .append($('<th>Author</th>'))
-                    .append($('<th>Description</th>')));
+                .append($('<tr>').append(
+                    '<th>Title</th>',
+                    '<th>Author</th>',
+                    '<th>Description</th>'));
             for (let book of books) {
-                // add book data
+                // add book details
                 booksTable.append(
-                    $('<tr>')
-                        .append($('<td></td>').text(book.title))
-                        .append($('<td></td>').text(book.author))
-                        .append($('<td></td>').text(book.description))
-                );
+                    $('<tr>').append(
+                        $('<td>').text(book.title),
+                        $('<td>').text(book.author),
+                        $('<td>').text(book.description)));
 
                 // add book comments
                 let bookComments = [];
                 if (typeof(book.comments) != 'undefined' && book.comments.length > 0) {
-                    for (let comment of book.comments) {
+                    for(let comment of book.comments) {
                         bookComments.push(comment);
                     }
                 }
@@ -162,7 +142,7 @@ function showListBooksView() {
 
                 // add Create Comment link
                 comments.append($('<div style="display: inline">')
-                    .append($('<a href="#" id="linkCreateComment" onclick="showFormCreateComment()" >Add comment</a>')));
+                        .append($('<a href="#" id="linkCreateComment" onclick="showFormCreateComment()" >Add comment</a>')));
 
                 // add [hidden] Create Comment Form
                 comments.append(
@@ -192,27 +172,25 @@ function showCreateBookView() {
     showView('viewCreateBook');
 }
 function createBook() {
-    let booksUrl = kinveyServiceBaseUrl + "appdata/" + kinveyAppId + "/books";
-    let newBookData = {
+    const kinveyBooksUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/books";
+    const kinveyAuthHeaders = {
+        "Authorization": "Kinvey " + sessionStorage.getItem('authToken')
+    };
+    let bookData = {
         title: $('#bookTitle').val(),
         author: $('#bookAuthor').val(),
         description: $('#bookDescription').val()
     };
-    let authHeaders = {
-        "Authorization": "Kinvey " + sessionStorage.authToken
-        // "Content-Type": "application/json"
-    };
     $.ajax({
         method: "POST",
-        url: booksUrl,
-        data: newBookData,
-        // data: JSON.stringify(newBookData), // used with Content-Type: application/json
-        headers: authHeaders,
-        success: bookCreated,
-        error: showAjaxError
+        url: kinveyBooksUrl,
+        headers: kinveyAuthHeaders,
+        data: bookData,
+        success: createBookSuccess,
+        error: handleAjaxError
     });
-    function bookCreated(data) {
-        showListBooksView();
+    function createBookSuccess(response) {
+        listBooks();
         showInfo("Book created");
         $('#formCreateBook')[0].reset();
     }
@@ -259,17 +237,38 @@ function addBookComment(bookData, commentText, commentAuthor) {
 
 function logout() {
     sessionStorage.clear();
+    showHideMenuLinks();
     showView('viewHome');
-    showHideNavigationLinks();
+}
+
+function showInfo(message) {
+    $('#infoBox').text(message).show();
+    setTimeout(function () {
+        $('#infoBox').fadeOut()
+    }, 3000);
+}
+function showError(errorMsg) {
+    $('#errorBox').text("Error: " + errorMsg).show();
+}
+function handleAjaxError(response) {
+    let errorMsg = JSON.stringify(response);
+    if(response.readyState === 0)
+        errorMsg = "Cannot connect due to network error";
+    if (response.responseJSON && response.responseJSON.description)
+        errorMsg = response.responseJSON.description;
+    showError(errorMsg);
 }
 
 $(function () {
-    $("#linkHome").click(showHomeView);
-    $("#linkLogin").click(showLoginView);
-    $("#linkRegister").click(showRegisterView);
-    $("#linkListBooks").click(showListBooksView);
-    $("#linkCreateBook").click(showCreateBookView);
-    $("#linkLogout").click(logout);
+    showHideMenuLinks();
+    showView('viewHome');
+
+    $('#linkHome').click(showHomeView);
+    $('#linkLogin').click(showLoginView);
+    $('#linkRegister').click(showRegisterView);
+    $('#linkListBooks').click(listBooks);
+    $('#linkCreateBook').click(showCreateBookView);
+    $('#linkLogout').click(logout);
 
     $('#formLogin').submit(function (e) {
         e.preventDefault(); login();
@@ -280,18 +279,17 @@ $(function () {
     $('#formCreateBook').submit(function (e) {
         e.preventDefault(); createBook();
     });
-    $('#formCreateComment').submit(function (e, bookData, commentText, commentAuthor) {
+    $('#formCreateComment')[i].submit(function (e, bookData, commentText, commentAuthor) {
         e.preventDefault(); addBookComment(bookData, commentText, commentAuthor);
     });
 
-    showHomeView();
-    showHideNavigationLinks();
 
-    $(document)
-        .ajaxStart(function () {
-            $('#loadingBox').show();
-        })
-        .ajaxStop(function () {
-            $('#loadingBox').hide();
-        })
+    $(document).on({
+        ajaxStart: function () {
+            $('#loadingBox').show()
+        },
+        ajaxStop: function () {
+            $('#loadingBox').hide()
+        }
+    })
 });
