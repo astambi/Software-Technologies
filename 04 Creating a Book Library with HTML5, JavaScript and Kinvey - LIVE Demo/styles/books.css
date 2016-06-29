@@ -1,0 +1,55 @@
+header {
+    background: #DDD;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-align: center;
+}
+header a {
+    text-decoration: none;
+    padding: 10px 10px;
+    border-radius: 3px;
+}
+header a:hover {
+    background: lightsteelblue;
+}
+#loadingBox, #infoBox, #errorBox {
+    display: none;
+    background: #AAA;
+    padding: 5px 10px;
+    border-radius: 3px;
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+    color: white;
+}
+#loadingBox {
+    background: #7cb3e9;
+}
+#infoBox {
+    background: #393;
+}
+#errorBox {
+    background: #f50;
+}
+main > section {
+    display: none;
+}
+table th {
+    background: lightsteelblue;
+    font-size: 1.2em;
+    padding: 10px;
+    border-radius: 3px;
+}
+table td {
+    background: lavender;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+footer  {
+    background: #DDD;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 0.8em;
+    margin: 10px 0px;
+}
