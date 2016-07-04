@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fifty Shades of Grey - Tailor-made for Judge</title>
+    <title>Fifty Shades of Grey</title>
     <style>
         div {
             display: inline-block;
