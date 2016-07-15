@@ -19,9 +19,10 @@ if (isset($_GET['title'])) {
     $mysqli = new mysqli('localhost', 'root', '', 'blog');
     $mysqli->set_charset("utf8");
 
-    $stmt = $mysqli->prepare("INSERT INTO posts(title, content) VALUES (?, ?)");
-    $title = htmlspecialchars($_GET['title']);
-    $content = htmlspecialchars($_GET['content']);
+    $stmt = $mysqli->prepare(
+        "INSERT INTO posts(title, content) VALUES (?, ?)");
+    $title = $_GET['title'];
+    $content = $_GET['content'];
     $stmt->bind_param("ss", $title, $content);
     $stmt->execute();
 

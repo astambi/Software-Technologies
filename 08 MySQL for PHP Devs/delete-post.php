@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     
     if ($st->affected_rows == 1) echo "Post deleted.";
 }
-$result = $mysqli->query('SELECT id, title FROM posts');
+$result = $mysqli->query("SELECT id, title FROM posts");
 while ($row = $result->fetch_assoc()) {
     $title = htmlspecialchars($row['title']);
     $delLink = 'delete-post.php?id=' . $row['id'];

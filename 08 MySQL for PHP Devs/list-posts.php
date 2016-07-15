@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List Posts from MySQL</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -12,7 +13,7 @@ $mysqli->set_charset("utf8");
 
 if ($mysqli->connect_errno) die('Cannot connect to MySQL');
 
-$result = $mysqli->query('SELECT * FROM posts ORDER BY date');
+$result = $mysqli->query("SELECT * FROM posts ORDER BY date DESC");
 if (!$result) die('Cannot read `posts` table from MySQL');
 
 echo "<table>\n";
