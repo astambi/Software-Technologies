@@ -1,8 +1,11 @@
 <?php
+// Connect to MySQL
+
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
 $dbname = 'blog';
+
 $mysqli = new mysqli($hostname, $username, $password, $dbname);
 
 if ($mysqli->connect_errno)
@@ -10,12 +13,18 @@ if ($mysqli->connect_errno)
 
 $mysqli->set_charset("utf8");
 
+// Execute SQL Query
+
 $query = $mysqli->prepare(
-    "INSERT INTO users(username, password, fullname) VALUES(?,?,?)");
-$userUsername = "Greta";
-$userPassword = md5("IchLiebeWurstchen");
-$userFullname = "Greta Berghoffen";
-$query->bind_param("sss", $userUsername, $userPassword, $userFullname);
+    "INSERT INTO users(username, password, fullname) " .
+    "VALUES(?,?,?)");
+$newUsername = "Greta";
+$newPassword = md5("IchLiebeWurstchen");
+$newFullname = "Greta Berghoffen";
+
+$query->bind_param(
+    "sss",
+    $newUsername, $newPassword, $newFullname);
 $query->execute();
 
 if ($query->affected_rows == 1)
