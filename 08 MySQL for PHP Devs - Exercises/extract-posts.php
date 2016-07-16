@@ -27,5 +27,9 @@ if ($result->num_rows > 0)
             . "Title: " . htmlspecialchars($row['title']) . "<br>\n"
             . "Content: " . htmlspecialchars($row['content']) . "<br>\n"
             . "Date: " . htmlspecialchars($row['date']) . "<br>\n";
+//        echo "Id: " . $row['id'] . "<br>\n"
+//            . "Title: " . $row['title'] . "<br>\n"
+//            . "Content: " . $row['content'] . "<br>\n"
+//            . "Date: " . $row['date'] . "<br>\n";
     }
 else echo "0 results";
