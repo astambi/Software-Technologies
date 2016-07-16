@@ -54,9 +54,9 @@ DELETE FROM posts
 WHERE id=6;
 
 DELETE FROM posts
-WHERE user_id =
-      (SELECT id FROM users
-       WHERE username='joe');
+WHERE user_id = (SELECT id
+                 FROM users
+                 WHERE username='joe');
 
 INSERT INTO
   users (username, password_hash, full_name)
@@ -79,11 +79,11 @@ VALUES
 
 SELECT *
 FROM posts
-WHERE user_id =
-      (SELECT id FROM users
-      WHERE username='pepi');
+WHERE user_id = (SELECT id
+                 FROM users
+                 WHERE username='pepi');
 
 DELETE FROM posts
-WHERE user_id =
-      (SELECT id FROM users
-      WHERE username = 'pepi');
+WHERE user_id = (SELECT id
+                 FROM users
+                 WHERE username = 'pepi');
