@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List Posts from MySQL</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 
