@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ASP.NET_MVC.Models.Post>
+@using ASP.NET_MVC.Classes
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Posts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments) Count
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tags) Count
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var post in Model) {
+    <tr>
+        <td>
+            @if (post.User != null && post.User.FullName != null)
+            {
+                @Html.DisplayFor(modelItem => post.User.FullName);
+            }
+            @if (post.User != null)
+            { 
+                @:(@Html.DisplayFor(modelItem => post.User.Username)) 
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Title)
+        </td>
+        <td>
+            @Utils.CutText(post.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Comments.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Tags.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=post.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=post.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=post.ID })
+        </td>
+    </tr>
+}
+
+</table>

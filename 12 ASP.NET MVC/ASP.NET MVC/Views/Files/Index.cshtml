@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listing Files in @ViewBag.Path</h2>
+
+<form>
+    <input type="text" name="path"/>
+    <input type="submit"/>
+</form>
+
+@model List<string>
+
+<div>
+    @*<a href="\Files\Index\?path=@ViewBag.ParentFolder">Parent Folder</a>*@
+    @Html.ActionLink("Parent Folder", "Index", new { path = ViewBag.ParentFolder})
+</div>
+
+@foreach (string file in Model)
+{
+    <div>
+        @*<a href="\Files\Index\?path=@file">@file</a>*@
+        @Html.ActionLink(file, "Index", new { path = file })
+    </div>
+}
