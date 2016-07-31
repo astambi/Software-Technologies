@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+@model List<MVC_Blog.Models.Post>
+
+
+<section class="sidebar">
+    <h2 class="sidebar-title">
+        Recent Posts
+    </h2>
+    <div class="sidebar-posts">
+        @foreach (var sidebarPost in ViewBag.SidebarPosts)
+        {
+            <h4 class="sidebar-post">
+                @*<a href="\Posts\Details\@sidebarPost.Id">@sidebarPost.Title</a>*@
+                @*<a href="@Url.Action("Details", "Posts", new {id = sidebarPost.Id})">@sidebarPost.Title</a>*@
+                @Html.ActionLink((string)@sidebarPost.Title, "Details", "Posts", new { id = @sidebarPost.Id }, null)
+            </h4 >
+        }
+    </div >
+</section >
+
+<section class="row">
+    @foreach (var post in Model)
+    {
+        <article class="post col-md-4">
+            <h2 class="title">
+                @Html.ActionLink((string)@post.Title, "Details", "Posts", new { id = @post.Id }, null)
+            </h2>
+            <div class="about">
+                Posted on <i>@post.Date</i>
+                @if (post.Author != null)
+                {
+                    @:by
+                    if (post.Author.FullName != null)
+                    {
+                        <i>@post.Author.FullName</i>
+                        <i>(@post.Author.UserName)</i>
+                    }
+                    else
+                    {
+                        <i>@post.Author.UserName</i>
+                    }
+                }
+            </div>
+            <div class="body">@Html.Raw(post.Body)</div>
+        </article>
+    }
+</section>

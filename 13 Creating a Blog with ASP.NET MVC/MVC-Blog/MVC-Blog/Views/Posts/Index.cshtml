@@ -1,0 +1,73 @@
+﻿@using MVC_Blog.Classes;
+@using MVC_Blog.Models;
+
+@model IEnumerable<Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Post", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (Post post in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => post.Title)
+        </td>
+        <td>
+            @Utils.CutText(post.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => post.Date)
+        </td>
+        <td>
+            @if (post.Author != null)
+            {
+                if (post.Author.FullName != null)
+                {
+                    @Html.DisplayFor(modelItem => post.Author.FullName)
+                }
+                @:(@Html.DisplayFor(modelItem => post.Author.UserName))
+            }
+            else
+            {
+                <i>No Author</i>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = post.Id })
+
+            @if (User.IsInRole("Administrators"))
+            {
+                @: | @Html.ActionLink("Edit", "Edit", new { id = post.Id })
+                @: | @Html.ActionLink("Delete", "Delete", new { id = post.Id })
+            }
+            else if (User.Identity.Name == post.Author.UserName)
+            {
+                @: | @Html.ActionLink("Edit", "Edit", new { id = post.Id })
+            }
+        </td>
+    </tr>
+}
+
+</table>
