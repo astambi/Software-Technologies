@@ -3,6 +3,10 @@ import org.mindrot.jbcrypt.BCrypt;
 import javax.persistence.*;
 import java.util.*;
 
+// to CREATE/ UPDATE database tables modify persistence.xml accordingly:
+//        <property name="hibernate.hbm2ddl.auto" value="create" />
+//        <property name="hibernate.hbm2ddl.auto" value="update" />
+
 public class Seed {
 
     public static void main(String[] args) {

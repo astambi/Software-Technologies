@@ -2,13 +2,18 @@
     <persistence-unit name="blog-db">
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <!--database-->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/blog_db" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />
+            <!--encoding-->
             <property name="hibernate.connection.characterEncoding" value="utf-8" />
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="true" />
-            <!-- For Seed => value="create" -->
+            <!--database tables-->
+            <!--to CREATE db tables => value="create"-->
+            <!--to UPDATE db tables => value="update"-->
+            <!--for Seed => value="create" -->
             <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
     </persistence-unit>
