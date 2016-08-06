@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--Thymeleaf template engine reference-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: head"
+      th:with="pageTitle='Hello, Thymeleaf'" >
+</head>
+<body>
+    <header th:include="fragments/layout :: site-header" />
+    <main>
+        Message from the model:
+        <!--/*@thymesVar id="msg" type="app"*/-->
+        <h1 th:text="${msg}"></h1>
+        <h3>Date:
+            <!--/*@thymesVar id="date" type="app"*/-->
+            <span th:text="${date}"></span>
+        </h3>
+    </main>
+    <footer th:include="fragments/layout :: site-footer" />
+</body>
+</html>

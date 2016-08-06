@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--Thymeleaf template engine reference-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--close tag-->
+    <meta charset="UTF-8" />
+    <title>Greeting</title>
+</head>
+<body>
+    <header th:include="fragments/layout :: site-header"/>
+    <main>
+        Hello,
+        <!--/*@thymesVar id="personToGreet" type="app"*/-->
+        <b th:text="${personToGreet}"></b>
+        <form>
+            <div>Enter your name:</div>
+            <input type="text" name="name" />
+            <input type="submit" value="Greeting"/>
+        </form>
+    </main>
+    <footer th:include="fragments/layout :: site-footer" />
+</body>
+</html>

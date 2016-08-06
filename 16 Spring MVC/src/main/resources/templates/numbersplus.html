@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--Thymeleaf template engine reference-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--close tag-->
+    <meta charset="UTF-8"/>
+    <title>Numbers</title>
+</head>
+<body>
+    <header th:include="fragments/layout :: site-header"/>
+    <main>
+        <!--Numbers + extra text-->
+        <h3>Numbers 1...50 + extra info:</h3>
+        <ul>
+            <li th:each="i : ${#numbers.sequence(1,50)}">
+                <!--/*@thymesVar id="date" type="app"*/-->
+                <b th:text="'number ' + ${i}"></b>
+                <i th:with="date=${new java.util.Date().toString()}"
+                   th:text="'(printed on ' + ${date} + ')'">
+                </i>
+            </li>
+        </ul>
+    </main>
+    <footer th:include="fragments/layout :: site-footer" />
+</body>
+</html>

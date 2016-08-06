@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--Thymeleaf template engine reference-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: head"
+      th:with="pageTitle='List Files'" >
+</head>
+<body>
+    <header th:include="fragments/layout :: site-header"/>
+    <main>
+        <h1>
+            Files in
+            <!--/*@thymesVar id="path" type="app"*/-->
+            <span th:text="${path}"></span>
+        </h1>
+        <form style="margin-bottom: 10px">
+            <input type="text" name="path"/>
+            <input type="submit" value="Enter Path to Directory"/>
+        </form>
+        <!--/*@thymesVar id="allFiles" type="app"*/-->
+        <div th:each="file : ${allFiles}">
+            <a th:href="@{/files(path=${file.path})}"
+               th:text="${file.name}">
+            </a>
+        </div>
+    </main>
+    <footer th:include="fragments/layout :: site-footer" />
+</body>
+</html>

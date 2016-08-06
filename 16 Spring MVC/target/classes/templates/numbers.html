@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--Thymeleaf template engine reference-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: head"
+      th:with="pageTitle='Numbers'" >
+</head>
+<body>
+    <header th:include="fragments/layout :: site-header"/>
+    <main>
+        <h3>Numbers 1...50:</h3>
+        <ul>
+            <li th:each="i : ${#numbers.sequence(1,50)}"
+                th:text="${i}">
+            </li>
+        </ul>
+    </main>
+    <footer th:include="fragments/layout :: site-footer" />
+</body>
+</html>
