@@ -9,7 +9,7 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public String greeting(
-            @RequestParam(value = "name", defaultValue = "unknown") String personName,
+            @RequestParam(value = "name", defaultValue = "Stranger") String personName,
             Model model) {
         model.addAttribute("personToGreet", personName);
         return "greeting";

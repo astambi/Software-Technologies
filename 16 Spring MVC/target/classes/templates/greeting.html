@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <!--Thymeleaf template engine reference-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!--close tag-->
-    <meta charset="UTF-8" />
-    <title>Greeting</title>
+<head th:include="fragments/layout :: head"
+      th:with="pageTitle='Greeting'" >
 </head>
 <body>
     <header th:include="fragments/layout :: site-header"/>

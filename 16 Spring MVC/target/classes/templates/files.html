@@ -7,15 +7,16 @@
 <body>
     <header th:include="fragments/layout :: site-header"/>
     <main>
-        <h1>Files in
-            <!--/*@thymesVar id="path" type="app"*/-->
+        <h1>
+            Files in
+            <!--/*@thymesVar id="path" type="app/controllers"*/-->
             <span th:text="${path}"></span>
         </h1>
         <form style="margin-bottom: 10px">
             <input type="text" name="dir"/>
             <input type="submit" value="Enter Path to Directory"/>
         </form>
-        <!--/*@thymesVar id="files" type="app"*/-->
+        <!--/*@thymesVar id="files" type="app/controllers"*/-->
         <div th:each="f : ${files}">
             <a th:href="@{/files(dir=${f})}"
                th:text="${f}">

@@ -5,27 +5,28 @@
     <meta charset="UTF-8" />
     <!--/*@thymesVar id="pageTitle" type="templates"*/-->
     <title th:if="${pageTitle}" th:text="${pageTitle}"></title>
+    <link th:href="@{css/site.css}" rel="stylesheet" />
 </head>
 <body>
     <header th:fragment="site-header" >
-        <div style="background-color: #DDD; margin-bottom: 10px; padding: 10px; border-radius: 5px">
+        <div th:class="header">
             Spring MVC
-            <a href="/" style="margin: 5px">Home</a>
-            <a href="/date" style="margin: 5px">Date</a>
-            <a href="/nakov/new/hello" style="margin: 5px">Nakov</a>
-            <a href="/hello" style="margin: 5px">Hello</a>
-            <a href="/greeting" style="margin: 5px">Greeting</a>
-            <a href="/numbers" style="margin: 5px">Numbers</a>
-            <a href="/numbersplus" style="margin: 5px">Numbers+</a>
-            <a href="/files" style="margin: 5px">Files</a>
-            <a href="/allfiles" style="margin: 5px">All Files</a>
+            <a href="/" th:class="header-link">Home</a>
+            <a href="/date" th:class="header-link">Date</a>
+            <a href="/nakov/new/hello" th:class="header-link">Nakov</a>
+            <a href="/hello" th:class="header-link">Hello</a>
+            <a href="/greeting" th:class="header-link">Greeting</a>
+            <a href="/numbers" th:class="header-link">Numbers</a>
+            <a href="/numbersplus" th:class="header-link">Numbers+</a>
+            <a href="/files" th:class="header-link">Files</a>
+            <a href="/filesplus" th:class="header-link">Files+</a>
         </div>
     </header>
-    <main th:fragment="main" >
+    <main th:fragment="main" th:class="main">
         Main Fragment
     </main>
     <footer th:fragment="site-footer" >
-        <div style="background-color: #EEE; margin-top: 10px; padding: 10px; border-radius: 5px">
+        <div th:class="footer">
             &copy; SotUni 2016
         </div>
     </footer>

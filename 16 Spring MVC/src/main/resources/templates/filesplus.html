@@ -9,16 +9,16 @@
     <main>
         <h1>
             Files in
-            <!--/*@thymesVar id="path" type="app"*/-->
+            <!--/*@thymesVar id="path" type="app/controllers"*/-->
             <span th:text="${path}"></span>
         </h1>
         <form style="margin-bottom: 10px">
-            <input type="text" name="path"/>
+            <input type="text" name="dir"/>
             <input type="submit" value="Enter Path to Directory"/>
         </form>
-        <!--/*@thymesVar id="allFiles" type="app"*/-->
+        <!--/*@thymesVar id="allFiles" type="app/controllers"*/-->
         <div th:each="file : ${allFiles}">
-            <a th:href="@{/files(path=${file.path})}"
+            <a th:href="@{/filesplus(dir=${file.path})}"
                th:text="${file.name}">
             </a>
         </div>

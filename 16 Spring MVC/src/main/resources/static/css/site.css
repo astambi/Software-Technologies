@@ -1,0 +1,24 @@
+.header {
+    background-color: #ddd;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.header-link {
+    margin: 5px;
+}
+
+.footer {
+    background-color: #eee;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.greeting-color {
+    background-color: #6db33f;
+    color: floralwhite;
+    border-radius: 15px;
+    padding: 15px;
+}

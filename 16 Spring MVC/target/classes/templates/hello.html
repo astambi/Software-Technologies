@@ -9,7 +9,7 @@
     <main>
         Message from the model:
         <!--/*@thymesVar id="msg" type="app"*/-->
-        <h1 th:text="${msg}"></h1>
+        <h1 th:text="${msg}" th:class="greeting-color"></h1>
         <h3>Date:
             <!--/*@thymesVar id="date" type="app"*/-->
             <span th:text="${date}"></span>

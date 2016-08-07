@@ -11,19 +11,19 @@ public class FilesController {
 
     @RequestMapping("/files")
     public String listFiles(Model model,
-                @RequestParam(value = "dir", defaultValue = "C:/") String path) {
+                @RequestParam(value = "dir", defaultValue = "C:\\") String path) {
         File[] files = new File(path).listFiles();
         model.addAttribute("files", files);
         model.addAttribute("path", path);
         return "files";
     }
 
-    @RequestMapping("/allfiles")
+    @RequestMapping("/filesplus")
     public String files(Model model,
-                @RequestParam(value = "path", defaultValue = "C:\\") String path) {
+                @RequestParam(value = "dir", defaultValue = "C:/") String path) {
         File[] allFiles = new File(path).listFiles();
         model.addAttribute("allFiles", allFiles);
         model.addAttribute("path", path);
-        return "allfiles";
+        return "filesplus";
     }
 }
