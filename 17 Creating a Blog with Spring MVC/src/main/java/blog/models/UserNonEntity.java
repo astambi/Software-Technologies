@@ -1,27 +1,14 @@
 package blog.models;
 
-import javax.persistence.*;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserNonEntity {
     private Long id;
-
-    @Column(nullable = false, length = 30, unique = true)
     private String username;
-
-    @Column(length = 60)
     private String passwordHash;
-
-    @Column(length = 100)
     private String fullName;
-
-    @OneToMany(mappedBy = "author")
-    private Set<Post> posts = new HashSet<Post>();
+    private Set<Post> posts = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -63,15 +50,10 @@ public class User {
         this.posts = posts;
     }
 
-    public User() {
+    public UserNonEntity() {
     }
 
-    public User(String username, String fullName) {
-        this.username = username;
-        this.fullName = fullName;
-    }
-
-    public User(Long id, String username, String fullName) {
+    public UserNonEntity(Long id, String username, String fullName) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
