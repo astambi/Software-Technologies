@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+    <title>Welcome to Spring MVC Blog</title>
+</head>
+<body>
+    <header th:replace="layout :: site-header"></header>
+
+    <!--<h1>Welcome to Spring MVC</h1>-->
+    <!--Now is: <b th:text="${execInfo.now.time}"> date and time</b>-->
+
+    <aside>
+        <h2>Recent Posts</h2>
+        <!--/*@thymesVar id="latest5posts" type="blog/controllers"*/-->
+        <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}"
+           th:href="@{/posts/view/{id}/(id=${p.id})}">
+            Work Begins on HTML5.1
+        </a>
+    </aside>
+
+    <main id="posts">
+        <!--/*@thymesVar id="latest3posts" type="blog/controllers"*/-->
+        <article th:each="p : ${latest3posts}">
+            <h1 th:text="${p.title}" class="title">Post Title</h1>
+            <div class="date">
+                <i>Posted on</i>
+                <span th:text="${#dates.format(p.date, 'dd-mm-yyyy')}">07-August-2016</span>
+                <span th:if="${p.author}" th:remove="tag">
+                    <i>by</i>
+                    <span th:text="${p.author.fullName != null ?
+                    p.author.fullName : p.author.username}">Anna Stambolieva</span>
+                </span>
+            </div>
+            <p th:utext="${p.body}" class="content">Post content</p>
+        </article>
+    </main>
+
+    <footer th:replace="layout :: site-footer"></footer>
+</body>
+</html>

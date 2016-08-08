@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+    <title th:text="${post.title}">View Post Details</title>
+</head>
+<body>
+    <header th:replace="layout :: site-header"></header>
+
+    <main id="posts">
+        <article>
+            <!--/*@thymesVar id="post" type="blog/controllers"*/-->
+            <h2 th:text="${post.title}" class="title">Post Title</h2>
+            <div class="date">
+                <i>Posted on</i>
+                <span th:text="${#dates.format(post.date, 'dd-mm-yyyy')}">07-August-2016</span>
+                <span th:if="${post.author}" th:remove="tag">
+                    <i>by</i>
+                    <span th:text="${post.author.fullName != null ?
+                    post.author.fullName : post.author.username}">Anna Stambolieva</span>
+                </span>
+            </div>
+            <p th:utext="${post.body}" class="content">Post content</p>
+        </article>
+    </main>
+
+    <footer th:replace="layout :: site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+    <title>Login</title>
+</head>
+<body>
+
+    <header th:replace="layout :: site-header"></header>
+
+    <h1>Please login</h1>
+
+    <!--/*@thymesVar id="loginForm" type="blog/controllers"*/-->
+    <form method="post" th:object="${loginForm}">
+        <div><label for="username">Username:</label></div>
+        <input type="text" id="username" name="username" th:value="*{username}" />
+        <span class="formError" th:if="${#fields.hasErrors('username')}"
+              th:errors="*{username}">Invalid username</span>
+
+        <div><label for="password" th:value="*{username}">Password:</label></div>
+        <input type="password" id="password" name="password" th:value="*{password}" />
+        <span class="formError" th:if="${#fields.hasErrors('password')}"
+              th:errors="*{password}">Invalid password</span>
+
+        <div>
+            <input type="submit" value="Login"/>
+            <a href="register.html" th:href="@{/users/register}">[Go to Register]</a>
+        </div>
+    </form>
+
+    <footer th:replace="layout :: site-footer"></footer>
+
+</body>
+</html>
