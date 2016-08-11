@@ -19,17 +19,17 @@ public class P25AdvertisementMessage {
         String[] cities = {"Burgas", "Sofia", "Plovdiv", "Varna", "Ruse"};
         Scanner scan = new Scanner(System.in);
         int msgCount = Integer.parseInt(scan.nextLine());
+        Random random = new Random();
         for (int i = 0; i < msgCount; i++) {
-            String randomMsg = randomStr(phrases) + " "
-                            + randomStr(events) + " "
-                            + randomStr(authors) + " - "
-                            + randomStr(cities);
+            String randomMsg = randomStr(phrases, random) + " "
+                            + randomStr(events, random) + " "
+                            + randomStr(authors, random) + " - "
+                            + randomStr(cities, random);
             System.out.println(randomMsg);
         }
     }
 
-    private static String randomStr(String[] sequence) {
-        Random random = new Random();
+    private static String randomStr(String[] sequence, Random random) {
         int index = random.nextInt(sequence.length);
         return sequence[index];
     }
