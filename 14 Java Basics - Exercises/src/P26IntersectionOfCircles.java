@@ -19,7 +19,6 @@ public class P26IntersectionOfCircles {
         return distanceCircleCenters <= c1.getRadius() + c2.getRadius();
     }
 
-
 //    use to submit in Judge
 
     static class Circle {
