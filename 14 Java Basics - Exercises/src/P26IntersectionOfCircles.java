@@ -13,13 +13,11 @@ public class P26IntersectionOfCircles {
     }
 
     private static boolean circlesIntersect(Circle c1, Circle c2) {
-        double deltaX = c1.getX() - c2.getX();
-        double deltaY = c1.getY() - c2.getY();
+        double deltaX = c1.x - c2.x;
+        double deltaY = c1.y - c2.y;
         double distanceCircleCenters = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-        return distanceCircleCenters <= c1.getRadius() + c2.getRadius();
+        return distanceCircleCenters <= c1.radius + c2.radius;
     }
-
-//    use to submit in Judge
 
     static class Circle {
         private int x;
@@ -29,30 +27,6 @@ public class P26IntersectionOfCircles {
         public Circle(int x, int y, int radius) {
             this.x = x;
             this.y = y;
-            this.radius = radius;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public void setX(int x) {
-            this.x = x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public void setY(int y) {
-            this.y = y;
-        }
-
-        public int getRadius() {
-            return radius;
-        }
-
-        public void setRadius(int radius) {
             this.radius = radius;
         }
     }
